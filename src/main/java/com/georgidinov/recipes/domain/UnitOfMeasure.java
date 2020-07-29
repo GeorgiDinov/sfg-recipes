@@ -1,4 +1,4 @@
-package com.georgidinov.sfgrecepies.domain;
+package com.georgidinov.recipes.domain;
 
 
 import lombok.Getter;
