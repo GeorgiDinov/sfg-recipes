@@ -1,6 +1,6 @@
-package com.georgidinov.recipes.repositories;
+package com.georgidinov.recipesapp.repositories;
 
-import com.georgidinov.recipes.domain.Recipe;
+import com.georgidinov.recipesapp.domain.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {

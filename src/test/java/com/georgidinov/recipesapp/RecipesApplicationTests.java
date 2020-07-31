@@ -1,4 +1,4 @@
-package com.georgidinov.recipes;
+package com.georgidinov.recipesapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

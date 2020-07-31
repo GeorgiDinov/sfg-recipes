@@ -1,4 +1,4 @@
-package com.georgidinov.recipes.domain;
+package com.georgidinov.recipesapp.domain;
 
 public enum Difficulty {
 

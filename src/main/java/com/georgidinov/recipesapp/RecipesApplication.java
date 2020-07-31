@@ -1,4 +1,4 @@
-package com.georgidinov.recipes;
+package com.georgidinov.recipesapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

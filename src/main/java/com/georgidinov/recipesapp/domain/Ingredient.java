@@ -1,4 +1,4 @@
-package com.georgidinov.recipes.domain;
+package com.georgidinov.recipesapp.domain;
 
 import lombok.Getter;
 import lombok.Setter;
