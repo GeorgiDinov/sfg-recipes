@@ -9,6 +9,7 @@
             <attr sel="#source" th:text="${recipe.source}"/>
             <attr sel="#url" th:text="${recipe.url}"/>
             <attr sel="#difficulty" th:text="${recipe.difficulty}"/>
+            <attr sel="#directions" th:text="${recipe.directions}"/>
             <attr sel="#notes" th:text="${recipe.notes.recipeNotes}"/>
         </attr>
     </attr>
