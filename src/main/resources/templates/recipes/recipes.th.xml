@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#recipesTableBody">
+        <attr sel="#row" th:each="recipe: ${recipes}">
+            <attr sel="#description" th:text="${recipe.description}"/>
+            <attr sel="#prepTime" th:text="${recipe.prepTime}"/>
+            <attr sel="#cookTime" th:text="${recipe.cookTime}"/>
+            <attr sel="#servings" th:text="${recipe.servings}"/>
+            <attr sel="#source" th:text="${recipe.source}"/>
+            <attr sel="#url" th:text="${recipe.url}"/>
+            <attr sel="#difficulty" th:text="${recipe.difficulty}"/>
+            <attr sel="#notes" th:text="${recipe.notes.recipeNotes}"/>
+        </attr>
+    </attr>
+</thlogic>

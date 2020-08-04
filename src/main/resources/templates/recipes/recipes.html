@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: paleturquoise;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!--/*@thymeleaf id="vet" type="com.georgidinov.recipeapp.domain.Recipe"*/-->
+<div align="center">
+    <h2>Recipes</h2>
+    <table style="width:100%">
+        <tr>
+            <th>Description</th>
+            <th>Prep Time</th>
+            <th>Cook Time</th>
+            <th>Servings</th>
+            <th>Source</th>
+            <th>Url</th>
+            <th>Difficulty</th>
+            <th>Notes</th>
+        </tr>
+        <tbody id="recipesTableBody">
+        <tr id="row">
+            <td id="description">Recipe Description</td>
+            <td id="prepTime">Prep Time</td>
+            <td id="cookTime">Cook Time</td>
+            <td id="servings">Servings</td>
+            <td id="source">Source</td>
+            <td id="url">Url</td>
+            <td id="difficulty">Difficulty</td>
+            <td id="notes">Notes</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+<!--    <tr th:each="recipe: ${recipes}">-->
+<!--        <td id="description" th:text="${recipe.description}">Recipe Description</td>-->
+<!--        <td id="prepTime" th:text="${recipe.prepTime}">Prep Time</td>-->
+<!--        <td id="cookTime" th:text="${recipe.cookTime}">Cook Time</td>-->
+<!--        <td id ="servings" th:text="${recipe.servings}">Servings</td>-->
+<!--        <td id="source" th:text="${recipe.source}">Source</td>-->
+<!--        <td id="url" th:text="${recipe.url}">Url</td>-->
+<!--        <td id="difficulty" th:text="${recipe.difficulty}">Difficulty</td>-->
+<!--        <td id="notes" th:text="${recipe.notes}">Notes</td>-->
+<!--    </tr>-->

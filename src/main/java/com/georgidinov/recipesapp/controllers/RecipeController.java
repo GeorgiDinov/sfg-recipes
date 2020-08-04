@@ -23,9 +23,7 @@ public class RecipeController {
     @RequestMapping({"/recipes", "recipesList", "recipes.html"})
     public String recipes(Model model){
         model.addAttribute("recipes", this.recipeRepository.findAll());
-        return "recipes/recipesList";
+        return "recipes/recipes";
     }//end of method recipes
-
-
 
 }//end of class RecipeController
