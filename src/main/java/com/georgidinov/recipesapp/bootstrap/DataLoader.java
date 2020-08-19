@@ -8,6 +8,7 @@ import com.georgidinov.recipesapp.domain.Recipe;
 import com.georgidinov.recipesapp.repositories.CategoryRepository;
 import com.georgidinov.recipesapp.repositories.RecipeRepository;
 import com.georgidinov.recipesapp.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -38,8 +40,10 @@ public class DataLoader implements CommandLineRunner {
 
     //== public methods ==
     @Override
+    //@Transactional
     public void run(String... args) throws Exception {
         this.loadData();
+        log.debug("Loading bootstrap data...");
     }//end of method run
 
 

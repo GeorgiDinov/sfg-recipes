@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+
     <style>
-        table, th, td {
+        table,thead, th, td {
             border: 1px solid black;
             border-collapse: collapse;
             background-color: paleturquoise;
@@ -14,35 +22,78 @@
 </head>
 <body>
 <!--/*@thymeleaf id="vet" type="com.georgidinov.recipeapp.domain.Recipe"*/-->
-<div align="center">
-    <h2>Recipes</h2>
-    <table style="width:100%">
-        <tr>
-            <th>Description</th>
-            <th>Prep Time</th>
-            <th>Cook Time</th>
-            <th>Servings</th>
-            <th>Source</th>
-            <th>Url</th>
-            <th>Difficulty</th>
-            <th>Directions</th>
-            <th>Notes</th>
-        </tr>
-        <tbody id="recipesTableBody">
-        <tr id="row">
-            <td id="description">Recipe Description</td>
-            <td id="prepTime">Prep Time</td>
-            <td id="cookTime">Cook Time</td>
-            <td id="servings">Servings</td>
-            <td id="source">Source</td>
-            <td id="url">Url</td>
-            <td id="difficulty">Difficulty</td>
-            <td id="directions">Directions</td>
-            <td id="notes">Notes</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">My Recipes</h1>
+                </div>
+                <div class="panel-body">
+                    <div id="tableResponsive" class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>Description</th>
+                                <th>Prep Time</th>
+                                <th>Cook Time</th>
+                                <th>Servings</th>
+                                <th>Source</th>
+                                <th>Url</th>
+                                <th>Difficulty</th>
+                                <th>Directions</th>
+                                <th>Notes</th>
+                            </tr>
+                            </thead>
+                            <tbody id="recipesTableBody">
+                            <tr id="row">
+                                <td id="description">Recipe Description</td>
+                                <td id="prepTime">Prep Time</td>
+                                <td id="cookTime">Cook Time</td>
+                                <td id="servings">Servings</td>
+                                <td id="source">Source</td>
+                                <td id="url">Url</td>
+                                <td id="difficulty">Difficulty</td>
+                                <td id="directions">Directions</td>
+                                <td id="notes">Notes</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!--<div align="center">-->
+<!--    <h2>Recipes</h2>-->
+<!--    <table style="width:100%">-->
+<!--        <tr>-->
+<!--            <th>Description</th>-->
+<!--            <th>Prep Time</th>-->
+<!--            <th>Cook Time</th>-->
+<!--            <th>Servings</th>-->
+<!--            <th>Source</th>-->
+<!--            <th>Url</th>-->
+<!--            <th>Difficulty</th>-->
+<!--            <th>Directions</th>-->
+<!--            <th>Notes</th>-->
+<!--        </tr>-->
+<!--        <tbody id="recipesTableBody">-->
+<!--        <tr id="row">-->
+<!--            <td id="description">Recipe Description</td>-->
+<!--            <td id="prepTime">Prep Time</td>-->
+<!--            <td id="cookTime">Cook Time</td>-->
+<!--            <td id="servings">Servings</td>-->
+<!--            <td id="source">Source</td>-->
+<!--            <td id="url">Url</td>-->
+<!--            <td id="difficulty">Difficulty</td>-->
+<!--            <td id="directions">Directions</td>-->
+<!--            <td id="notes">Notes</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
 </body>
 </html>
 

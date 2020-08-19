@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <thlogic>
+    <!--/*@thymeleaf id="vet" type="com.georgidinov.recipeapp.domain.Recipe"*/-->
+    <attr sel="#tableResponsive" th:if="${not #lists.isEmpty(recipes)}"/>
     <attr sel="#recipesTableBody">
         <attr sel="#row" th:each="recipe: ${recipes}">
             <attr sel="#description" th:text="${recipe.description}"/>
