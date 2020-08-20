@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.HashSet;
@@ -17,6 +19,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 class RecipeControllerTest {
 
@@ -34,6 +39,18 @@ class RecipeControllerTest {
         MockitoAnnotations.initMocks(this);
         controller = new RecipeController(recipeService);
     }//end of setUp method
+
+
+    @Test
+    void testMockMVC() throws Exception {
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        mockMvc.perform(get("/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipes/recipes"));
+
+    }//end of test method testMockMVC
 
     @Test
     void recipes() {
