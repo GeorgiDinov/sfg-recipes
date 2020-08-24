@@ -1,42 +1,29 @@
 package com.georgidinov.recipesapp.controllers;
 
-import com.georgidinov.recipesapp.domain.Category;
-import com.georgidinov.recipesapp.domain.UnitOfMeasure;
-import com.georgidinov.recipesapp.repositories.CategoryRepository;
-import com.georgidinov.recipesapp.repositories.UnitOfMeasureRepository;
+import com.georgidinov.recipesapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 @Slf4j
 @Controller
 public class IndexController {
 
     //== fields ==
-    private final CategoryRepository categoryRepository;
-    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
     //== constructors ==
     @Autowired
-    public IndexController(CategoryRepository categoryRepository,
-                           UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-    }//end of constructor
-
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }//end of controller
 
     //== public methods ==
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage() {
-        Optional<Category> categoryOptional =
-                this.categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional =
-                this.unitOfMeasureRepository.findByDescription("Teaspoon");
-        System.out.println("Category id is: " + categoryOptional.get().getId());
-        System.out.println("UnitOfMeasure id is: " + unitOfMeasureOptional.get().getId());
+    public String getIndexPage(Model model) {
+        model.addAttribute("recipes", this.recipeService.getRecipes());
         return "index";
     }
 

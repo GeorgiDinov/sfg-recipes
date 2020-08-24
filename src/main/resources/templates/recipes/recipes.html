@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
 
-    <style>
-        table,thead, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            background-color: paleturquoise;
-            text-align: center;
-        }
-    </style>
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <!--/*@thymeleaf id="vet" type="com.georgidinov.recipeapp.domain.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-12 col-md-offset-6">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1 class="panel-title">My Recipes</h1>
@@ -65,45 +62,5 @@
         </div>
     </div>
 </div>
-<!--<div align="center">-->
-<!--    <h2>Recipes</h2>-->
-<!--    <table style="width:100%">-->
-<!--        <tr>-->
-<!--            <th>Description</th>-->
-<!--            <th>Prep Time</th>-->
-<!--            <th>Cook Time</th>-->
-<!--            <th>Servings</th>-->
-<!--            <th>Source</th>-->
-<!--            <th>Url</th>-->
-<!--            <th>Difficulty</th>-->
-<!--            <th>Directions</th>-->
-<!--            <th>Notes</th>-->
-<!--        </tr>-->
-<!--        <tbody id="recipesTableBody">-->
-<!--        <tr id="row">-->
-<!--            <td id="description">Recipe Description</td>-->
-<!--            <td id="prepTime">Prep Time</td>-->
-<!--            <td id="cookTime">Cook Time</td>-->
-<!--            <td id="servings">Servings</td>-->
-<!--            <td id="source">Source</td>-->
-<!--            <td id="url">Url</td>-->
-<!--            <td id="difficulty">Difficulty</td>-->
-<!--            <td id="directions">Directions</td>-->
-<!--            <td id="notes">Notes</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
 </body>
 </html>
-
-<!--    <tr th:each="recipe: ${recipes}">-->
-<!--        <td id="description" th:text="${recipe.description}">Recipe Description</td>-->
-<!--        <td id="prepTime" th:text="${recipe.prepTime}">Prep Time</td>-->
-<!--        <td id="cookTime" th:text="${recipe.cookTime}">Cook Time</td>-->
-<!--        <td id ="servings" th:text="${recipe.servings}">Servings</td>-->
-<!--        <td id="source" th:text="${recipe.source}">Source</td>-->
-<!--        <td id="url" th:text="${recipe.url}">Url</td>-->
-<!--        <td id="difficulty" th:text="${recipe.difficulty}">Difficulty</td>-->
-<!--        <td id="notes" th:text="${recipe.notes}">Notes</td>-->
-<!--    </tr>-->
