@@ -1,6 +1,8 @@
 package com.georgidinov.recipesapp.controllers;
 
+import com.georgidinov.recipesapp.commands.IngredientCommand;
 import com.georgidinov.recipesapp.commands.RecipeCommand;
+import com.georgidinov.recipesapp.services.IngredientService;
 import com.georgidinov.recipesapp.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class IngredientControllerTest {
 
     @Mock
+    IngredientService ingredientService;
+
+    @Mock
     RecipeService recipeService;
 
     IngredientController controller;
@@ -30,7 +35,7 @@ class IngredientControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        controller = new IngredientController(recipeService);
+        controller = new IngredientController(recipeService, ingredientService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }//end of setUp method
 
@@ -40,7 +45,7 @@ class IngredientControllerTest {
 
         //given
         RecipeCommand command = new RecipeCommand();
-       command.setId(1L);
+        command.setId(1L);
         when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
         //when
@@ -53,5 +58,23 @@ class IngredientControllerTest {
         verify(recipeService, times(1)).findCommandById(anyLong());
 
     }//end of method testListIngredients
+
+    @Test
+    void testShowIngredient() throws Exception {
+
+        //given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+
+        //when
+        when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong()))
+                .thenReturn(ingredientCommand);
+
+        //then
+        mockMvc.perform(get("/recipe/1/ingredient/2/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipes/ingredients/show"))
+                .andExpect(model().attributeExists("ingredient"));
+
+    }//end of method testShowIngredient
 
 }//end of class IngredientControllerTest
