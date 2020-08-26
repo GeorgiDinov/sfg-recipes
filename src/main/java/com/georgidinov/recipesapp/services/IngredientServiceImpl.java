@@ -1,13 +1,17 @@
 package com.georgidinov.recipesapp.services;
 
 import com.georgidinov.recipesapp.commands.IngredientCommand;
+import com.georgidinov.recipesapp.converters.IngredientCommandToIngredient;
 import com.georgidinov.recipesapp.converters.IngredientToIngredientCommand;
 import com.georgidinov.recipesapp.domain.Ingredient;
 import com.georgidinov.recipesapp.domain.Recipe;
+import com.georgidinov.recipesapp.domain.UnitOfMeasure;
 import com.georgidinov.recipesapp.repositories.RecipeRepository;
+import com.georgidinov.recipesapp.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,15 +22,20 @@ public class IngredientServiceImpl implements IngredientService {
     //== fields ==
     private final RecipeRepository recipeRepository;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
+    private final IngredientCommandToIngredient ingredientCommandToIngredient;
+    private final UnitOfMeasureRepository unitOfMeasureRepository;
 
 
     //== constructors ==
     @Autowired
     public IngredientServiceImpl(RecipeRepository recipeRepository,
-                                 IngredientToIngredientCommand ingredientToIngredientCommand
-    ) {
+                                 IngredientToIngredientCommand ingredientToIngredientCommand,
+                                 IngredientCommandToIngredient ingredientCommandToIngredient,
+                                 UnitOfMeasureRepository unitOfMeasureRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
+        this.ingredientCommandToIngredient = ingredientCommandToIngredient;
+        this.unitOfMeasureRepository = unitOfMeasureRepository;
     }//end of constructor
 
 
@@ -55,5 +64,49 @@ public class IngredientServiceImpl implements IngredientService {
 
         return ingredientToIngredientCommand.convert(ingredient);
     }
+
+
+    @Override
+    @Transactional
+    public IngredientCommand saveIngredientCommand(IngredientCommand command) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(command.getRecipeId());
+
+        if (recipeOptional.isEmpty()) {
+            //todo toss error if not found
+            log.error("Recipe not found for id {}", command.getRecipeId());
+            return new IngredientCommand();
+        } else {
+            Recipe recipe = recipeOptional.get();
+
+            Optional<Ingredient> ingredientOptional =
+                    recipe.getIngredients()
+                            .stream()
+                            .filter(ingredient -> ingredient.getId().equals(command.getId()))
+                            .findFirst();
+
+            if (ingredientOptional.isPresent()) {
+                Ingredient ingredientFound = ingredientOptional.get();
+                ingredientFound.setDescription(command.getDescription());
+                ingredientFound.setAmount(command.getAmount());
+
+                Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findById(command.getUnitOfMeasure().getId());
+                unitOfMeasureOptional.ifPresent(ingredientFound::setUom);
+
+            } else {
+                recipe.getIngredients().add(ingredientCommandToIngredient.convert(command));
+            }
+
+            Recipe savedRecipe = recipeRepository.save(recipe);
+
+            //todo check for fail
+            return ingredientToIngredientCommand.convert(
+                    savedRecipe.getIngredients()
+                            .stream()
+                            .filter(ingredient -> ingredient.getId().equals(command.getId()))
+                            .findFirst()
+                            .get());
+        }//end of else
+
+    }//end of method saveIngredientCommand
 
 }//end of class IngredientServiceImpl
