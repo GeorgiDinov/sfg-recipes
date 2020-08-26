@@ -7,6 +7,7 @@ import com.georgidinov.recipesapp.converters.UnitOfMeasureCommandToUnitOfMeasure
 import com.georgidinov.recipesapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.georgidinov.recipesapp.domain.Ingredient;
 import com.georgidinov.recipesapp.domain.Recipe;
+import com.georgidinov.recipesapp.repositories.IngredientRepository;
 import com.georgidinov.recipesapp.repositories.RecipeRepository;
 import com.georgidinov.recipesapp.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,9 @@ class IngredientServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    IngredientRepository ingredientRepository;
+
     IngredientService service;
 
 
@@ -48,7 +52,7 @@ class IngredientServiceImplTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         service = new IngredientServiceImpl(recipeRepository, ingredientToIngredientCommand,
-                ingredientCommandToIngredient, unitOfMeasureRepository);
+                ingredientCommandToIngredient, unitOfMeasureRepository, ingredientRepository);
     }
 
     @Test
@@ -113,5 +117,16 @@ class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
     }
+
+    @Test
+    void testDeleteById() throws Exception {
+        //given
+            Long idToDelete = 3L;
+        //when
+        service.deleteById(idToDelete);
+        //then
+        verify(ingredientRepository, times(1)).deleteById(anyLong());
+    }//end of method testDeleteById
+
 
 }//end of class IngredientServiceImplTest

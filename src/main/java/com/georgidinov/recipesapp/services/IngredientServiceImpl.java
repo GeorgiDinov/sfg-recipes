@@ -6,6 +6,7 @@ import com.georgidinov.recipesapp.converters.IngredientToIngredientCommand;
 import com.georgidinov.recipesapp.domain.Ingredient;
 import com.georgidinov.recipesapp.domain.Recipe;
 import com.georgidinov.recipesapp.domain.UnitOfMeasure;
+import com.georgidinov.recipesapp.repositories.IngredientRepository;
 import com.georgidinov.recipesapp.repositories.RecipeRepository;
 import com.georgidinov.recipesapp.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final IngredientRepository ingredientRepository;
 
 
     //== constructors ==
@@ -31,11 +33,13 @@ public class IngredientServiceImpl implements IngredientService {
     public IngredientServiceImpl(RecipeRepository recipeRepository,
                                  IngredientToIngredientCommand ingredientToIngredientCommand,
                                  IngredientCommandToIngredient ingredientCommandToIngredient,
-                                 UnitOfMeasureRepository unitOfMeasureRepository) {
+                                 UnitOfMeasureRepository unitOfMeasureRepository,
+                                 IngredientRepository ingredientRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.ingredientRepository = ingredientRepository;
     }//end of constructor
 
 
@@ -118,5 +122,10 @@ public class IngredientServiceImpl implements IngredientService {
         }//end of else
 
     }//end of method saveIngredientCommand
+
+    @Override
+    public void deleteById(Long id) {
+        this.ingredientRepository.deleteById(id);
+    }
 
 }//end of class IngredientServiceImpl
