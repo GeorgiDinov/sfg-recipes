@@ -1,6 +1,8 @@
 package com.georgidinov.recipesapp.controllers;
 
 import com.georgidinov.recipesapp.commands.IngredientCommand;
+import com.georgidinov.recipesapp.commands.RecipeCommand;
+import com.georgidinov.recipesapp.commands.UnitOfMeasureCommand;
 import com.georgidinov.recipesapp.services.IngredientService;
 import com.georgidinov.recipesapp.services.RecipeService;
 import com.georgidinov.recipesapp.services.UnitOfMeasureService;
@@ -50,6 +52,21 @@ public class IngredientController {
                 this.ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id))
         );
         return "recipes/ingredients/show";
+    }
+
+    @GetMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipeIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = this.recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", this.unitOfMeasureService.listAllUnitOfMeasures());
+        return "recipes/ingredients/ingredientform";
     }
 
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
