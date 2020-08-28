@@ -3,7 +3,9 @@ package com.georgidinov.recipesapp.services;
 import com.georgidinov.recipesapp.converters.RecipeCommandToRecipe;
 import com.georgidinov.recipesapp.converters.RecipeToRecipeCommand;
 import com.georgidinov.recipesapp.domain.Recipe;
+import com.georgidinov.recipesapp.exceptions.NotFoundException;
 import com.georgidinov.recipesapp.repositories.RecipeRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -40,6 +42,14 @@ class RecipeServiceImplTest {
         recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }//end of setUp method
 
+    @Test
+    void getRecipeByIdTestNotFound() throws Exception {
+        Optional<Recipe> recipeOptional = Optional.empty();
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Assertions.assertThrows(NotFoundException.class,
+                () -> recipeService.findById(1L));
+    }
 
     @Test
     void getRecipeById() throws Exception {

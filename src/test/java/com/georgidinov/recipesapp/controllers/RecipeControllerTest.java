@@ -2,6 +2,7 @@ package com.georgidinov.recipesapp.controllers;
 
 import com.georgidinov.recipesapp.commands.RecipeCommand;
 import com.georgidinov.recipesapp.domain.Recipe;
+import com.georgidinov.recipesapp.exceptions.NotFoundException;
 import com.georgidinov.recipesapp.services.RecipeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,16 @@ class RecipeControllerTest {
 
     }//end of getRecipe test method
 
+    @Test
+    void testGetRecipeNotFound() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
+    }
 
     @Test
     void testGetNewRecipeForm() throws Exception {
