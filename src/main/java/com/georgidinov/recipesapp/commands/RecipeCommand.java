@@ -21,8 +21,8 @@ public class RecipeCommand {
     //== fields ==
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 255)
+    @NotBlank(message = "{0} cannot be blank")
+    @Size(min = 3, max = 255, message ="{0} must be between {min} and {max} characters long.")
     private String description;
 
     @Min(1)
